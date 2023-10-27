@@ -8,7 +8,6 @@ from PIL import Image
 from tqdm.autonotebook import tqdm
 from pathlib import Path, PurePath
 import sys
-sys.path.append(str(Path().absolute().parent))
 
 
 class FixShape(TT.Transform):
@@ -62,14 +61,13 @@ def get_img_list_dataloader(img_list, batch_size=16, num_workers=0, pin_memory=F
 
 
 class InferenceModel:
-    def __init__(self, threshold=0.5):
+    def __init__(self, model_path, threshold=0.5):
         """Core inference class for DeepGPET"""
         
         self.transform = get_default_img_transform()
         self.threshold = threshold
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        weight_path = list(Path(sys.path[-1]).rglob("*.pth"))[0]
-        self.model = torch.load(weight_path, map_location=self.device)
+        self.model = torch.load(model_path, map_location=self.device)
         self.model.eval()
 
     @torch.inference_mode()

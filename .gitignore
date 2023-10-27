@@ -2,7 +2,7 @@ choseg/metrics/metrics.py
 choseg/data/
 choseg/trainer.py
 choseg/deepgpet.py
-notebooks/
+minimal_example.ipynb
 
 .ipynb_checkpoints
 __pycache__

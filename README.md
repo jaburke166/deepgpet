@@ -41,6 +41,24 @@ To get a local copy up and running follow these steps.
 2. Copy the commands into your anaconda prompt found in `install.txt`.
     - Note if you have a GPU running locally to use DeepGPET, line 2 should be `conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia`
 
+### Minimal example
+
+```
+from choseg import inference, utils
+
+# Load model
+model_path = r"choseg\weights\model_weights.pth"
+deepgpet = inference.InferenceModel(model_path=model_path, threshold=0.5)
+
+# Load image
+img_path = r"notebooks\example_data\image1.png" #"path\to\img"
+img = utils.load_img(img_path)
+
+# Segment
+img_seg = deepgpet(img)
+utils.plot_img(img, cmap=utils.generate_imgmask(img_seg), sidebyside=True)
+```
+
 ---
 ## Contributors and Citing
 
