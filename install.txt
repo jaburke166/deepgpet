@@ -1,4 +1,4 @@
-pconda create -n choroid-analysis python=3.11.6
+conda create -n choroid-analysis python=3.11.6
 conda activate choroid-analysis
-pip install torch torchvision
-pip install timm scikit-learn tqdm matplotlib seaborn notebook jupyterlab ipywidgets pandas scikit-image segmentation-models-pytorch x-unet torchmetrics albumentations openpyxl
+pip3 install torch torchvision
+pip3 install timm scikit-learn tqdm matplotlib seaborn notebook jupyterlab ipywidgets pandas scikit-image segmentation-models-pytorch x-unet torchmetrics albumentations openpyxl

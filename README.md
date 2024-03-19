@@ -2,7 +2,7 @@
 
 Repository storing fully automatic DL-based approach, DeepGPET, for choroid region segmentation in optical coherence tomography images.
 
-The description of the model can be found [here](https://arxiv.org/abs/2307.00904). This paper has been accepted to be published in Translations Vision Science & Technology, published by the Association for Research and Vision in Ophthalmology.
+The description of the model can be found [here](https://tvst.arvojournals.org/article.aspx?articleid=2778573). The paper for this methodology has been published in Translations Vision Science & Technology, Association for Research and Vision in Ophthalmology (ARVO).
 
 ---
 
@@ -10,7 +10,7 @@ The description of the model can be found [here](https://arxiv.org/abs/2307.0090
 
 ```
 .
-├── choseg/             # core module for carrying out choroid region segmentation and derived regional measurements
+├── choseg/         # core module for carrying out choroid region segmentation and derived regional measurements
 ├── example_data/	# example OCT B-scans to demonstrate usage
 ├── notebooks/		# Jupyter notebooks to demonstrate usage
 ├── .gitignore
@@ -23,11 +23,11 @@ The description of the model can be found [here](https://arxiv.org/abs/2307.0090
 ```
 .
 ├── choseg/                             
-├───── metrics/             # Code to calculate downstream regional measures such choroid thickness, area and (subregional) volume
+├───── metrics/         # Code to calculate downstream regional measures such choroid thickness, area and (subregional) volume
 ├───── weights/		    # Stores the model weights.
 ├───── __init__.py
-├───── inference.py         # Inference classes for segmenting
-└───── utils.py             # Helper functions for plotting and processing segmentations.
+├───── inference.py     # Inference classes for segmenting
+└───── utils.py         # Helper functions for plotting and processing segmentations.
 ```
 
 ---
@@ -36,10 +36,20 @@ The description of the model can be found [here](https://arxiv.org/abs/2307.0090
 
 To get a local copy up and running follow these steps.
 
-1. Clone the repo via `git clone https://github.com/jaburke166/deepgpet.git`.
+1. Clone the DeepGPET repository via `git clone https://github.com/jaburke166/deepgpet.git`.
 
-2. Copy the commands into your anaconda prompt found in `install.txt`.
-    - Note if you have a GPU running locally to use DeepGPET, line 2 should be `conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia`
+2. Follow the instructions [here](https://docs.anaconda.com/free/miniconda/miniconda-install/) to download Miniconda3 for your desired operating system.
+
+3. Copy the commands into your anaconda prompt found in `install.txt` to create your own environment in Miniconda.
+    - Note if you have a GPU running locally to use DeepGPET, line 2 should read `pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu121`
+  
+4. Copy the `conda.pth` file into your python environments `site-packages` directory, commonly found at `path\to\miniconda3\envs\choroid-analysis\Lib\site-packages`
+    - Change the file paths in `conda.pth` the absolute file paths that link to the DeepGPET Github repository.
+    - This means your conda environment `choroid-analysis` now has access to the files in the DeepGPET.
+  
+5. Launch notebooks using `jupyter notebook` or jupyter labs using `jupyter lab`
+
+Done! You have successfully set up the software to analyse the choroid in OCT B-scans!
 
 ### Minimal example
 
@@ -68,13 +78,15 @@ utils.plot_img(img, cmap=utils.generate_imgmask(img_seg), sidebyside=True)
 If you wish to use this methodology please consider citing our work using the following BibText
 
 ```
-@misc{burke2023opensource,
-      title={An open-source deep learning algorithm for efficient and fully-automatic analysis of the choroid in optical coherence tomography}, 
-      author={Jamie Burke and Justin Engelmann and Charlene Hamid and Megan Reid-Schachter and Tom Pearson and Dan Pugh and Neeraj Dhaun and Stuart King and Tom MacGillivray and Miguel O. Bernabeu and Amos Storkey and Ian J. C. MacCormick},
-      year={2023},
-      eprint={2307.00904},
-      archivePrefix={arXiv},
-      primaryClass={eess.IV}
+@article{burke2023open,
+  title={An Open-Source Deep Learning Algorithm for Efficient and Fully Automatic Analysis of the Choroid in Optical Coherence Tomography},
+  author={Burke, Jamie and Engelmann, Justin and Hamid, Charlene and Reid-Schachter, Megan and Pearson, Tom and Pugh, Dan and Dhaun, Neeraj and Storkey, Amos and King, Stuart and MacGillivray, Tom J and others},
+  journal={Translational Vision Science \& Technology},
+  volume={12},
+  number={11},
+  pages={27--27},
+  year={2023},
+  publisher={The Association for Research in Vision and Ophthalmology}
 }
   ```
 
