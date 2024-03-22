@@ -103,6 +103,14 @@ choroid_metrics.compute_choroid_measurement(img_seg)
 
 Please refer to `usage.ipynb` for a more in depth description of segmenting the choroid using DeepGPET, and measuring choroid thickness and area.
 
+#### Related repositories
+
+If you are interested in choroid analysis in OCT images, check these repositories out:
+
+* [MMCQ](https://github.com/jaburke166/mmcq): A semi-automatic algorithm for choroid vessel segmentation in OCT B-scans based on multi-scale quantisation, histogram equalisation and pixel clustering.
+* [Choroidalyzer](https://github.com/justinengelmann/Choroidalyzer): A fully automatic, deep learning-based tool for choroid region and vessel segmentation, and fovea detection in OCT B-scans.
+* [EyePy](https://github.com/MedVisBonn/eyepy): A selection of python-based readers of various file formats of OCT B-scans, including `.vol` and `.e2e` format from Heidelberg.
+
 ---
 ## Contributors and Citing
 
