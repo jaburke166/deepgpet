@@ -2,9 +2,9 @@
 
 ## DeepGPET
 
-DeepGPET is a fully automatic, deep learning based method for choroid region segmentation in optical coherence tomography (OCT) scans. This algorithm can be used to segment the choroid region, and then subsequently measure clinically relevant metrics such as choroid thickness, area and volume. The method was trained on labels from a previously published, semi-automatic algorithm GPET.
+DeepGPET is a fully automatic, deep learning based method for choroid region segmentation in optical coherence tomography (OCT) scans. This algorithm can be used to segment the choroid region, and then subsequently measure clinically relevant metrics such as choroid thickness, area and volume. The method was trained on labels from a previously published, semi-automatic algorithm [GPET](https://ieeexplore.ieee.org/document/9623378).
 
-![schematic](figures/schematic.png)
+![schematic](install/figures/schematic.png)
 
 The description of the model can be found [here](https://tvst.arvojournals.org/article.aspx?articleid=2778573). The paper for this methodology has been published in Translations Vision Science & Technology, Association for Research and Vision in Ophthalmology (ARVO).
 
@@ -16,10 +16,10 @@ The description of the model can be found [here](https://tvst.arvojournals.org/a
 .
 ├── choseg/         # core module for carrying out choroid region segmentation and derived regional measurements
 ├── notebooks/		# Jupyter notebooks which stores example data and a demo of the pixel GUI to select the fovea.
+├── install/		# Files to help with installation.
 ├── .gitignore
 ├── README.md
-├── LICENSE
-└── install.txt		# Anaconda prompt commands for building conda environment with core packages
+└── usage.ipynb		# Anaconda prompt commands for building conda environment with core packages
 ```
 
 - The code found in `choseg`
@@ -42,6 +42,15 @@ The description of the model can be found [here](https://tvst.arvojournals.org/a
 └───── pixel_gui.py         # OpenCV-based implementation of a simple GUI to select pixels manually.
 ```
 
+- The code found in `install`
+```
+.
+├── install/                             
+├───── figures/             # Folder of images for README file.
+├───── conda.pth            # File to link DeepGPET's local repository folder to the conda environment.
+└───── install.txt          # Anaconda Prompt commands to built conda environment and packages
+```
+
 ---
 
 ## Getting Started
@@ -52,13 +61,13 @@ To get a local copy up and running follow these steps.
 
 2. You will need a local installation of python to run DeepGPET. We recommend a lightweight package management system such as Miniconda. Follow the instructions [here](https://docs.anaconda.com/free/miniconda/miniconda-install/) to download Miniconda for your desired operating system.
 
-3. After downloading, navigate and open the Anaconda Prompt, and copy each line found in `install.txt` to create your own environment in Miniconda and download necessary packages.
-    - Note if you have a GPU running locally to use DeepGPET, line 2 in `install.txt` should be `pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu121`
+3. After downloading, navigate and open the Anaconda Prompt, and individually copy and run each line found in `install.txt` to create your own environment in Miniconda and download necessary packages.
+    - Note if you have a GPU running locally to use DeepGPET, line 2 in `install/install.txt` should be `pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu121`
   
-4. Copy the `conda.pth` file into your python environments `site-packages` directory, commonly found at `path\to\miniconda3\envs\choroid-analysis\Lib\site-packages`
+4. (Optional) Copy the file `conda.pth` in `install/` file into your python environments `site-packages` directory, commonly found at `path\to\miniconda3\envs\choroid-analysis\Lib\site-packages`
     - Change the file paths in `conda.pth` the absolute file paths that link to the DeepGPET Github repository.
     - This means your conda environment `choroid-analysis` now has access to the files in the DeepGPET.
-    - Importantly, you can now use `import choves, choseg` in any notebook or python script which uses this conda environment.
+    - Importantly, you can now use `import choseg` in any notebook or python script which uses this conda environment.
   
 6. Activate your new environment using `conda activate choroid-analysis` on an Anaconda Prompt terminal.
  
