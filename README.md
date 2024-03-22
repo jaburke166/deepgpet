@@ -15,8 +15,8 @@ The description of the model can be found [here](https://tvst.arvojournals.org/a
 ```
 .
 ├── choseg/         # core module for carrying out choroid region segmentation and derived regional measurements
-├── notebooks/		# Jupyter notebooks which stores example data and a demo of the pixel GUI to select the fovea.
-├── install/		# Files to help with installation.
+├── notebooks/		# Jupyter notebooks which stores example data and a demo of the pixel GUI to select the fovea
+├── install/		# Files to help with installation
 ├── .gitignore
 ├── README.md
 └── usage.ipynb		# Anaconda prompt commands for building conda environment with core packages
@@ -29,7 +29,7 @@ The description of the model can be found [here](https://tvst.arvojournals.org/a
 ├───── metrics/         # Code to calculate downstream regional measures such choroid thickness, area and (subregional) volume
 ├───── __init__.py
 ├───── inference.py     # Inference classes for segmenting
-└───── utils.py         # Helper functions for plotting and processing segmentations.
+└───── utils.py         # Helper functions for plotting and processing segmentations
 ```
 
 - The code found in `choseg/metrics`
@@ -39,15 +39,15 @@ The description of the model can be found [here](https://tvst.arvojournals.org/a
 ├───── __init__.py                          
 ├───── choroid_metrics.py   # Code to calculate choroid measurements such choroid thickness, area and (subregional) volume
 ├───── choroid_utils.py     # Utility functions for measuring the choroid
-└───── pixel_gui.py         # OpenCV-based implementation of a simple GUI to select pixels manually.
+└───── pixel_gui.py         # OpenCV-based implementation of a simple GUI to select pixels manually
 ```
 
-- The code found in `install`
+- The files found in `install`
 ```
 .
 ├── install/                             
 ├───── figures/             # Folder of images for README file.
-├───── conda.pth            # File to link DeepGPET's local repository folder to the conda environment.
+├───── conda.pth            # File to link DeepGPET's local repository folder to the conda environment
 └───── install.txt          # Anaconda Prompt commands to built conda environment and packages
 ```
 
@@ -66,7 +66,7 @@ To get a local copy up and running follow these steps.
   
 4. (Optional) Copy the file `conda.pth` in `install/` file into your python environments `site-packages` directory, commonly found at `path\to\miniconda3\envs\choroid-analysis\Lib\site-packages`
     - Change the file paths in `conda.pth` the absolute file paths that link to the DeepGPET Github repository.
-    - This means your conda environment `choroid-analysis` now has access to the files in the DeepGPET.
+    - This means your conda environment `choroid-analysis` now has access to the files in your local copy of DeepGPET.
     - Importantly, you can now use `import choseg` in any notebook or python script which uses this conda environment.
   
 6. Activate your new environment using `conda activate choroid-analysis` on an Anaconda Prompt terminal.
@@ -103,7 +103,9 @@ choroid_metrics.compute_choroid_measurement(img_seg)
 
 Please refer to `usage.ipynb` for a more in depth description of segmenting the choroid using DeepGPET, and measuring choroid thickness and area.
 
-#### Related repositories
+---
+
+### Related repositories
 
 If you are interested in choroid analysis in OCT images, check these repositories out:
 
