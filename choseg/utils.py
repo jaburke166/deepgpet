@@ -48,14 +48,14 @@ def plot_img(img_data, traces=None, cmap=None, save_path=None, fname=None, sideb
     
     if sidebyside:
         fig, (ax0, ax) = plt.subplots(1,2,figsize=figsize)
-        ax0.imshow(img, cmap="gray", zorder=1)
+        ax0.imshow(img, cmap="gray", zorder=1, vmin=0, vmax=1)
         ax0.set_xticklabels([])
         ax0.set_yticklabels([])
         ax0.tick_params(axis='both', which='both', bottom=False,left=False, labelbottom=False)
     else:
         fig, ax = plt.subplots(1,1,figsize=figsize)
         
-    ax.imshow(img, cmap="gray", zorder=1)
+    ax.imshow(img, cmap="gray", zorder=1, vmin=0, vmax=1)
     fontsize=16
     if traces is not None:
         if len(traces) == 2:
@@ -177,41 +177,37 @@ def interp_trace(traces, align=True):
     return tuple(new_traces)
 
 
-def crop_trace(traces, check_idx=60, offset=10):
+def smart_crop(traces, check_idx=20, ythresh=1, align=True):
     '''
-    Crop trace left and right by searching check_idx either side to ensure
-    that there is at least an offset pixel height
+    Instead of defining an offset to check for and crop in utils.crop_trace(), which
+    may depend on the size of the choroid itself, this checks to make sure that adjacent
+    changes in the y-values of each trace are small, defined by ythresh.
     '''
-    # Align traces horizontally
-    h_idx = 0
-    top,bot = traces
-    top_stx, bot_stx = top[0,h_idx], bot[0,h_idx]
-    common_st_idx = max(top[0,h_idx], bot[0,h_idx])
-    common_en_idx = min(top[-1,h_idx], bot[-1,h_idx])
-    shifted_top = top[common_st_idx-top_stx:common_en_idx-top_stx]
-    shifted_bot = bot[common_st_idx-bot_stx:common_en_idx-bot_stx]
+    cropped_tr = []
+    for i in range(2):
+        _chor = traces[i]
+        ends_l = np.argwhere(np.abs(np.diff(_chor[:check_idx,1])) > ythresh)
+        ends_r = np.argwhere(np.abs(np.diff(_chor[-check_idx:,1])) > ythresh)
+        if ends_r.shape[0] != 0:
+            _chor = _chor[:-(check_idx-ends_r.min())]
+        if ends_l.shape[0] != 0:
+            _chor = _chor[ends_l.max()+1:]
+        cropped_tr.append(_chor)
 
-    # Now check to make sure at least an offset pixel height difference
-    height_idx = shifted_bot[:,1] - shifted_top[:,1]
-    left_idx = np.where(height_idx[:check_idx] >= offset)[0]
-    right_idx = np.where(height_idx[-check_idx:] >= offset)[0]-check_idx
-
-    # Reconstruct bounds
-    new_top = np.concatenate([top[left_idx], top[check_idx:-check_idx], top[right_idx]], axis=0)
-    new_bot = np.concatenate([bot[left_idx], bot[check_idx:-check_idx], bot[right_idx]], axis=0)
-    new_trace = np.asarray(interp_trace(np.concatenate([new_top[np.newaxis], new_bot[np.newaxis]], axis=0)))
-
-    return new_trace
+    return interp_trace(cropped_tr, align=align)
 
 
-def get_trace(pred_mask, threshold=0.5):
+
+def get_trace(pred_mask, threshold=0.5, align=False):
     '''
     Helper function to extract traces from a prediction mask. 
+    This thresholds the mask, selects the largest mask, extracts upper
+    and lower bounds of the mask and crops any endpoints which aren't continuous.
     '''
     binmask = (pred_mask > threshold).astype(int)
     binmask = select_largest_mask(binmask)
     traces = extract_bounds(binmask)
-    traces = interp_trace(traces, align=False)
+    traces = smart_crop(traces, align=align)
     return traces
     
 

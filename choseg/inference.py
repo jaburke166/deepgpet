@@ -60,15 +60,25 @@ def get_img_list_dataloader(img_list, batch_size=16, num_workers=0, pin_memory=F
     return loader
 
 
-class InferenceModel:
-    def __init__(self, model_path, threshold=0.5):
+class DeepGPET:
+    DEFAULT_MODEL_URL = 'https://github.com/jaburke166/deepgpet/releases/download/v1/deepgpet_weights.pth'
+    DEFAULT_THRESHOLD = 0.5
+    
+    def __init__(self, model_path=DEFAULT_MODEL_URL, threshold=DEFAULT_THRESHOLD, local_model_path=None):
         """Core inference class for DeepGPET"""
         
         self.transform = get_default_img_transform()
         self.threshold = threshold
         self.device = 'cuda' if torch.cuda.is_available() else 'cpu'
-        self.model = torch.load(model_path, map_location=self.device)
+        self.device = "mps" if torch.backends.mps.is_available() else "cpu"
+        if local_model_path is not None:
+            self.model = torch.load(local_model_path, map_location=self.device)
+        else:
+            self.model = torch.hub.load_state_dict_from_url(model_path, map_location=self.device)
+        if self.device != "cpu":
+            print("DeepGPET has been loaded with GPU acceleration!")
         self.model.eval()
+    
 
     @torch.inference_mode()
     def predict_img(self, img, soft_pred=False):
