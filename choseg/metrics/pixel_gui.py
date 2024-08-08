@@ -403,3 +403,4 @@ class select_pixels(object):
 
         # close the windows
         cv2.destroyAllWindows()
+        cv2.waitKey(1)
