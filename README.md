@@ -53,29 +53,39 @@ The description of the model can be found [here](https://tvst.arvojournals.org/a
 
 ---
 
-## Getting Started
+## Getting started
 
-To get a local copy up and running follow these steps.
+To get a local copy up, follow the steps in `quick_start.txt`, or follow the instructions below.
 
-1. Clone the DeepGPET repository via `git clone https://github.com/jaburke166/deepgpet.git`.
+1. You will need a local installation of Python to run AutoMorphalyzer. We recommend a lightweight package management system such as Miniconda. Follow the instructions [here](https://docs.anaconda.com/free/miniconda/miniconda-install/) to download Miniconda for your desired operating system.
 
-2. You will need a local installation of python to run DeepGPET. We recommend a lightweight package management system such as Miniconda. Follow the instructions [here](https://docs.anaconda.com/free/miniconda/miniconda-install/) to download Miniconda for your desired operating system.
+2. After downloading, navigate and open the Anaconda Prompt and clone the AutoMorphalyzer repository.
 
-3. After downloading, navigate and open the Anaconda Prompt, and individually copy and run each line found in `install.txt` to create your own environment in Miniconda and download necessary packages.
-    - Note if you have a GPU running locally to use DeepGPET, line 2 in `install/install.txt` should be `pip3 install torch torchvision --index-url https://download.pytorch.org/whl/cu121`
-  
-4. (Optional) Copy the file `conda.pth` in `install/` file into your python environments `site-packages` directory, commonly found at `path\to\miniconda3\envs\choroid-analysis\Lib\site-packages`
-    - Change the file paths in `conda.pth` the absolute file paths that link to the DeepGPET Github repository.
+```
+git clone https://github.com/jaburke166/deepgpet.git
+```
+
+3. Create environment and install dependencies to create your own environment in Miniconda. Open Anaconda Prompt and copy these lines in turn onto the terminal.
+
+```
+conda create -n automorph-env python=3.11 -y
+conda activate automorph-env
+pip install -r requirements.txt
+```
+
+4. (Optional) Copy the file `conda.pth` in `install/` file into your python environments `site-packages` directory, commonly found at `path\to\miniconda3\envs\choroid-analysis\Lib\site-packages` on Windows. Make sure to change the file paths in `conda.pth` to the absolute file path that link to the DeepGPET Github repository.
     - This means your conda environment `choroid-analysis` now has access to the files in your local copy of DeepGPET.
     - Importantly, you can now use `import choseg` in any notebook or python script which uses this conda environment.
-  
-6. Activate your new environment using `conda activate choroid-analysis` on an Anaconda Prompt terminal.
+    - 
+
+5. Activate your new environment using `conda activate choroid-analysis` on an Anaconda Prompt terminal.
  
 6. Launch notebooks using `jupyter notebook` or jupyter labs using `jupyter lab` and see the minimal example below so that you can analyse your own choroids!
 
-Done! You have successfully set up the software to analyse the choroid in OCT B-scans!
+Done! You have successfully set up the software to analyse the choroid region in optical coherence tomography B-scan data!
 
-If you have any problems using this method, please do not hesitate to contact us!
+**note**: If you have any problems using this method, please do not hesitate to contact us (see contact details at the end of this README)!
+
 
 ### Minimal example
 
@@ -109,9 +119,14 @@ Please refer to `usage.ipynb` for a more in depth description of segmenting the 
 
 If you are interested in choroid analysis in OCT images, check these repositories out:
 
+* [OCTolyzer](https://github.com/jaburke166/OCTolyzer): A fully automatic analysis toolkit for segmentation and feature extracting in OCT data (and scanning laser ophthalmoscopy data, or SLO). 
 * [MMCQ](https://github.com/jaburke166/mmcq): A semi-automatic algorithm for choroid vessel segmentation in OCT B-scans based on multi-scale quantisation, histogram equalisation and pixel clustering.
 * [Choroidalyzer](https://github.com/justinengelmann/Choroidalyzer): A fully automatic, deep learning-based tool for choroid region and vessel segmentation, and fovea detection in OCT B-scans.
 * [EyePy](https://github.com/MedVisBonn/eyepy): A selection of python-based readers of various file formats of OCT B-scans, including `.vol` and `.e2e` format from Heidelberg.
+
+If you are interested in en face analysis of the retina using colour fundus photography (CFP) or scanning laser ophthalmoscopy (SLO), check these repositories out:
+* [AutoMorphalyzer](https://github.com/jaburke166/AutoMorphalyzer): A fully automatic analysis toolkit for segmentation and feature extracting in CFP data, a restructured version of [AutoMorph](https://github.com/rmaphoh/AutoMorph).
+* [SLOctolyzer](https://github.com/jaburke166/SLOctolyzer): Analysis toolkit for automatic segmentation and measurement of retinal vessels on scanning laser ophthalmoscopy (SLO) images
 
 ---
 ## Contributors and Citing

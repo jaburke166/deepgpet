@@ -5,7 +5,7 @@ from torchvision.transforms import v2 as TT
 from torchvision import transforms as T
 import numpy as np
 from PIL import Image
-from tqdm.autonotebook import tqdm
+from tqdm import tqdm
 from pathlib import Path, PurePath
 import sys
 

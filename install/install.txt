@@ -1,5 +1,3 @@
-conda create -n choroid-analysis -c conda-forge python=3.11.6
-conda activate choroid-analysis
-pip3 install torch torchvision
-pip3 install timm scikit-learn tqdm matplotlib seaborn notebook jupyterlab ipywidgets pandas scikit-image segmentation-models-pytorch x-unet torchmetrics albumentations openpyxl
-
+conda create -n deepgpet python=3.11
+conda activate deepgpet
+pip install -r requirements.txt
